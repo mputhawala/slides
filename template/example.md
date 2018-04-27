@@ -21,7 +21,7 @@ This slide will be again vertically after the one above.
 
 -horizontal-
 
-Here is the last slide of the presentation. It has some notes if you press 's' to enter presenter mode.
+<img class="plain" src="images/inconsistent_gaussian_residuals.svg" width="100%"/>
 
 -notes-
 
