@@ -23,7 +23,8 @@ Here there be MathJax
 \def\y{\mathbf{y}}
 \def\A{\mathbf{A}}
 \def\b{\mathbf{b}}
-\def\xexact{\hat\x}
+\def\t{\intercal}
+\def\xexact{\x^\ast}
 \def\dd#1#2{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
 \def\innerprod#1#2{\langle #1 , #2 \rangle}
 \\)
@@ -53,7 +54,7 @@ In the overdetermined inconsistent case
 
 1. Pick \\(i\\) with \\(\P(i=j) \propto \norm{\A\_j}^2\\)
 
-1. Set \\(\x^{(k+1)} = \x^{(k)} + \frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\A\_i^\ast\\)
+1. Set \\(\x^{(k+1)} = \x^{(k)} + \frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\A\_i^\t\\)
 
 1. Repeat
 
@@ -80,9 +81,8 @@ Where \\(r = 1-\frac{\sigma\_N^2}{\sum\_{l=1}^N \sigma\_l^2}\\)
 Replace \\(\frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\\) with \\(\gamma\_k\\)
 
 \\[
-\x^{(k+1)} = \x^{(k)} + \gamma\_k \A\_i^\ast
+\x^{(k+1)} = \x^{(k)} + \gamma\_k \A\_i^\t
 \\]
-
 
 
 
@@ -96,15 +96,14 @@ Ideally, \\(\gamma\_k = \argmin{}\norm{\b-\A\x^{(k+1)}}^2\\)
 
 
 
-
 -vertical-
 
 \\[
 \begin{align}
 \mathbf 0 &=\dd{}{\gamma\_k}\norm{\b-\A\x^{(k+1)}}^2 \\\\
-&=\dd{}{\gamma\_k}\norm{\b-\A(\x^{(k)} + \gamma\_k \A\_i^\ast)}^2 \\\\
-&= -2\A\_i\A^\ast\left[\b-\A\left(\x^{(k)} + \gamma\_k \A\_i^\ast\right)\right] \\\\
-& \propto \gamma\_k \norm{\A\_i \A^\ast}^2 - \A\_i \A^\ast \left(\b-\A\x^{(k)}\right)
+&=\dd{}{\gamma\_k}\norm{\b-\A(\x^{(k)} + \gamma\_k \A\_i^\t)}^2 \\\\
+&= -2\A\_i\A^\t\left[\b-\A\left(\x^{(k)} + \gamma\_k \A\_i^\t\right)\right] \\\\
+& \propto \gamma\_k \norm{\A\_i \A^\t}^2 - \A\_i \A^\t \left(\b-\A\x^{(k)}\right)
 \end{align}
 \\]
 
@@ -115,7 +114,7 @@ Ideally, \\(\gamma\_k = \argmin{}\norm{\b-\A\x^{(k+1)}}^2\\)
 
 \\[
 \begin{align}
-\gamma\_k &= \frac{A\_i A^\ast (\b-\A\x^{(k)})}{\norm{\A\_i \A^\ast}^2} \\\\
+\gamma\_k &= \frac{A\_i A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2} \\\\
 \end{align}
 \\]
 
@@ -126,9 +125,9 @@ Ideally, \\(\gamma\_k = \argmin{}\norm{\b-\A\x^{(k+1)}}^2\\)
 
 ## Optimally Relaxed RK
 
-1. Pick \\(i\\) with \\(\P(i=j) \propto \norm{\A\_j \A^\ast}^2\\)
+1. Pick \\(i\\) with \\(\P(i=j) \propto \norm{\A\_j \A^\t}^2\\)
 
-1. Set \\(\x^{(k+1)} = \x^{(k)} + \frac{\A\_i \A^\ast (\b-\A\x^{(k)})}{\norm{\A\_i \A^\ast}^2}\A\_i^\ast\\)
+1. Set \\(\x^{(k+1)} = \x^{(k)} + \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t\\)
 
 1. Repeat
 
@@ -143,8 +142,8 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 
 \\[
 \begin{align}
-\e^{(k+1)} &= \e^{(k)} + \frac{A\_i A^\ast (\b-\A\xexact - \A\e^{(k)})}{\norm{\A\_i \A^\ast}^2}\A\_i^\ast \\\\
-&= \left[I - \frac{\A\_i^\ast \A\_i \A^\ast \A}{\norm{\A\_i \A^\ast}^2}\right]\e^{(k)}
+\e^{(k+1)} &= \e^{(k)} + \frac{A\_i A^\t (\b-\A\xexact - \A\e^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t \\\\
+&= \left[I - \frac{\A\_i^\t \A\_i \A^\t \A}{\norm{\A\_i \A^\t}^2}\right]\e^{(k)}
 \end{align}
 \\]
 
@@ -154,7 +153,7 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 -vertical-
 
 \\[
-\A \e^{(k+1)} = \left[I - \frac{\A\A\_i^\ast \A\_i \A^\ast }{\norm{\A\_i \A^\ast}^2}\right]\A\e^{(k)}
+\A \e^{(k+1)} = \left[I - \frac{\A\A\_i^\t \A\_i \A^\t }{\norm{\A\_i \A^\t}^2}\right]\A\e^{(k)}
 \\]
 
 Borrowing the convergence of RK
@@ -177,8 +176,6 @@ Where \\(r = 1 - \frac{\sigma\_N^4}{\sum\_{l=1}^N \sigma\_l^4}\\)
 
 
 
-
-
 -horizontal-
 
 ## Approximately
@@ -187,7 +184,7 @@ Where \\(r = 1 - \frac{\sigma\_N^4}{\sum\_{l=1}^N \sigma\_l^4}\\)
 Let \\(\tau\\) be a random set of indices and consider
 
 \\[
-\gamma\_k = \frac{\A\_i \A\_\tau^\ast (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\ast}^2}
+\gamma\_k = \frac{\A\_i \A\_\tau^\t (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\t}^2}
 \\]
 
 
@@ -199,8 +196,8 @@ If \\(\tau = \\{i\\}\\) we recover standard RK:
 
 \\[
 \begin{align}
-\gamma\_k &= \frac{A\_i A\_\tau^\ast (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\ast}^2} \\\\
-&= \frac{\A\_i \A\_i^\ast (\b\_i-\A\_i\x\_k)}{\norm{\A\_i \A\_i^\ast}^2} \\\\
+\gamma\_k &= \frac{A\_i A\_\tau^\t (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\t}^2} \\\\
+&= \frac{\A\_i \A\_i^\t (\b\_i-\A\_i\x\_k)}{\norm{\A\_i \A\_i^\t}^2} \\\\
 &= \frac{\b\_i-\A\_i\x\_k}{\norm{\A\_i}^2}
 \end{align}
 \\]
@@ -214,8 +211,8 @@ While if \\(\tau = \\{1, 2, \dots, M\\}\\)
 
 \\[
 \begin{align}
-\gamma\_k &= \frac{A\_i A\_\tau^\ast (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\ast}^2} \\\\
-&= \frac{\A\_i \A^\ast (\b-\A\x\_k)}{\norm{\A\_i \A^\ast}^2}
+\gamma\_k &= \frac{A\_i A\_\tau^\t (\b\_\tau-\A\_\tau\x\_k)}{\norm{\A\_i \A\_\tau^\t}^2} \\\\
+&= \frac{\A\_i \A^\t (\b-\A\x\_k)}{\norm{\A\_i \A^\t}^2}
 \end{align}
 \\]
 
@@ -224,30 +221,74 @@ we recover optimally relaxed RK
 
 
 
+-vertical-
+
+## Future Work
+
+* Prove convergence in consistent case
+* Prove convergence in inconsistent case
+
+
+
+
+-vertical-
+
+## Convergence (Consistent)
+
+Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
+
+\\[
+\e^{(k+1)} = \left[I - \frac{\A\_i^\t \A\_i \A\_\tau^\t \A\_\tau}{\norm{\A\_i \A\_\tau^\t}^2}\right]\e^{(k)}
+\\]
+
+\\[
+\A\_\tau \e^{(k+1)} = \left[I - \frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\right]\A\_\tau \e^{(k)}
+\\]
+
+
+
+
+-vertical-
+
+\\[
+\begin{align}
+\norm{\A\_\tau \e^{(k+1)}}^2 &= \norm{\A\_\tau \e^{(k)}}^2 - \norm{\frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\A\_\tau \e^{(k)}}^2 \\\\
+&= \norm{\A\_\tau \e^{(k)}}^2 - \frac{\|\A\_i \A\_\tau^\t\A\_\tau \e^{(k)}\|^2}{\norm{\A\_i \A\_\tau^\t}^2}
+\end{align}
+\\]
+
+
+
 
 
 -horizontal-
+
+## Experimental Results
+
+
+
+
+-vertical-
 
 <img class="plain" src="images/consistent_gaussian_errs.svg" width="100%"/>
 
 
 
 
-
--horizontal-
+-vertical-
 
 <img class="plain" src="images/inconsistent_gaussian_errs.svg" width="100%"/>
 
 
 
 
--horizontal-
+-vertical-
 
 <img class="plain" src="images/step_size_vs_n_rows_hist.svg" width="100%"/>
 
 
 
 
--horizontal-
+-vertical-
 
 <img class="plain" src="images/step_size_vs_n_terms_hist.svg" width="100%"/>
