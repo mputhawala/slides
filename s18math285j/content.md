@@ -192,7 +192,7 @@ Let \\(\tau\\) be a random set of indices and consider
 
 -vertical-
 
-If \\(\tau = \\{i\\}\\) we recover standard RK:
+If \\(\tau = \\{i\\}\\) we recover the standard RK update:
 
 \\[
 \begin{align}
@@ -216,7 +216,45 @@ While if \\(\tau = \\{1, 2, \dots, M\\}\\)
 \end{align}
 \\]
 
-we recover optimally relaxed RK
+we recover the optimally relaxed RK update
+
+
+
+
+-vertical-
+
+## Future Work
+
+Prove convergence results for approximate method
+
+
+
+
+-vertical-
+
+## Convergence (Consistent)
+
+Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
+
+\\[
+\e^{(k+1)} = \left[I - \frac{\A\_i^\t \A\_i \A\_\tau^\t \A\_\tau}{\norm{\A\_i \A\_\tau^\t}^2}\right]\e^{(k)}
+\\]
+
+\\[
+\A\_\tau \e^{(k+1)} = \left[I - \frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\right]\A\_\tau \e^{(k)}
+\\]
+
+
+
+
+-vertical-
+
+\\[
+\begin{align}
+\norm{\A\_\tau \e^{(k+1)}}^2 &= \norm{\A\_\tau \e^{(k)}}^2 - \norm{\frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\A\_\tau \e^{(k)}}^2 \\\\
+&= \norm{\A\_\tau \e^{(k)}}^2 - \frac{\|\A\_i \A\_\tau^\t\A\_\tau \e^{(k)}\|^2}{\norm{\A\_i \A\_\tau^\t}^2}
+\end{align}
+\\]
 
 
 
@@ -259,42 +297,4 @@ we recover optimally relaxed RK
 
 -horizontal-
 
-## Future Work
-
-Prove convergence results for approximate method
-
-
-
-
--vertical-
-
 ## Thanks for Listening
-
-
-
-
--vertical-
-
-## Convergence (Consistent)
-
-Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
-
-\\[
-\e^{(k+1)} = \left[I - \frac{\A\_i^\t \A\_i \A\_\tau^\t \A\_\tau}{\norm{\A\_i \A\_\tau^\t}^2}\right]\e^{(k)}
-\\]
-
-\\[
-\A\_\tau \e^{(k+1)} = \left[I - \frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\right]\A\_\tau \e^{(k)}
-\\]
-
-
-
-
--vertical-
-
-\\[
-\begin{align}
-\norm{\A\_\tau \e^{(k+1)}}^2 &= \norm{\A\_\tau \e^{(k)}}^2 - \norm{\frac{\A\_\tau \A\_i^\t \A\_i \A\_\tau^\t}{\norm{\A\_i \A\_\tau^\t}^2}\A\_\tau \e^{(k)}}^2 \\\\
-&= \norm{\A\_\tau \e^{(k)}}^2 - \frac{\|\A\_i \A\_\tau^\t\A\_\tau \e^{(k)}\|^2}{\norm{\A\_i \A\_\tau^\t}^2}
-\end{align}
-\\]
