@@ -297,4 +297,113 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 
 -horizontal-
 
+## Sparse Matrix Considerations
+
+Suppose the row entries \\(\A\_{ij} \overset{\_\mathrm{iid}}{\sim} \mathrm{Bern}(q_i)\\)
+
+What are the precompute and update costs (in SAXPYs)?
+
+
+
+
+-vertical-
+
+## RK Precompute Cost
+
+Precomputing row norms costs
+
+\\[\approx \sum_{i=1}^M q_i N\\]
+
+
+
+
+-vertical-
+
+## RK Update Cost
+
+\\[\x^{(k+1)} = \x^{(k)} + \frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\A\_i^\t\\]
+
+Step size costs 
+
+\\[\approx q_iN\\]
+
+Rest of update costs 
+
+\\[\approx q_iN\\]
+
+
+
+
+
+-vertical-
+
+## RK Total Cost
+
+Expected total cost of \\(T\\) iterations
+
+\\[\approx 2T\bar{q}N + \sum\_{i=1}^M q_i N\\]
+
+where \\(\bar{q}=\sum\_{i=1}^M \frac{\norm{\A\_i}^2}{\norm{\A}\_F^2} q\_i\\)
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+#### Precompute Cost
+
+Precomputing \\(\A\A^\t\\) and its row norms costs
+
+\\[\approx \sum\_{i=1}^M 2 \sum\_{j=1}^M \max(q_i, q_j) N\\]
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+#### Update Cost
+
+\\[\x^{(k+1)} = \x^{(k)} + \frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\A\_i^\t\\]
+
+Step size costs 
+
+\\[\approx q_iN\\]
+
+Rest of update costs 
+
+\\[\approx q_iN\\]
+
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+#### Total Cost
+
+Expected total cost of \\(T\\) iterations
+
+\\[\approx 2T\bar{q}N + \sum\_{i=1}^M q_i N\\]
+
+where \\(\bar{q}=\sum\_{i=1}^M \frac{\norm{\A\_i}^2}{\norm{\A}\_F^2} q\_i\\)
+
+
+
+
+
+
+
+-horizontal-
+
+
+\\[\x^{(k+1)} = \x^{(k)} + \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t\\]
+
+
+
+
+-horizontal-
+
 ## Thanks for Listening
