@@ -259,7 +259,6 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 
 
 
-
 -horizontal-
 
 ## Experimental Results
@@ -308,6 +307,26 @@ What are the precompute and update costs (in SAXPYs)?
 
 -vertical-
 
+## Sparsity of \\(\A \A^\t\\)
+
+\\[
+P(\langle \A_i, \A_j\rangle \neq 0) = \begin{cases}
+1 - (1-q_i)^N & j = i\\\\
+1 - (1-q_iq_j)^N & j \neq i
+\end{cases}
+\\]
+
+Define
+
+\\[p\_i = \sum\_{j=1}^M \frac{P(\langle \A_i, \A_j\rangle \neq 0)}{M}\\]
+
+\\[\\]
+
+
+
+
+-horizontal-
+
 ## RK Precompute Cost
 
 Precomputing row norms costs
@@ -334,72 +353,136 @@ Rest of update costs
 
 
 
-
 -vertical-
 
-## RK Total Cost
+## RK Expected Update Cost
 
-Expected total cost of \\(T\\) iterations
-
-\\[\approx 2T\bar{q}N + \sum\_{i=1}^M q_i N\\]
+\\[\approx 2\bar{q}N\\]
 
 where \\(\bar{q}=\sum\_{i=1}^M \frac{\norm{\A\_i}^2}{\norm{\A}\_F^2} q\_i\\)
-
-
-
-
--vertical-
-
-## Optimally Relaxed RK
-#### Precompute Cost
-
-Precomputing \\(\A\A^\t\\) and its row norms costs
-
-\\[\approx \sum\_{i=1}^M 2 \sum\_{j=1}^M \max(q_i, q_j) N\\]
-
-
-
-
--vertical-
-
-## Optimally Relaxed RK
-#### Update Cost
-
-\\[\x^{(k+1)} = \x^{(k)} + \frac{(b\_i-\A\_i \x^{(k)})}{\norm{\A\_i}^2}\A\_i^\t\\]
-
-Step size costs 
-
-\\[\approx q_iN\\]
-
-Rest of update costs 
-
-\\[\approx q_iN\\]
-
-
-
-
-
--vertical-
-
-## Optimally Relaxed RK
-#### Total Cost
-
-Expected total cost of \\(T\\) iterations
-
-\\[\approx 2T\bar{q}N + \sum\_{i=1}^M q_i N\\]
-
-where \\(\bar{q}=\sum\_{i=1}^M \frac{\norm{\A\_i}^2}{\norm{\A}\_F^2} q\_i\\)
-
-
-
 
 
 
 
 -horizontal-
 
+## Optimally Relaxed RK
 
-\\[\x^{(k+1)} = \x^{(k)} + \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t\\]
+Precomputing \\(\A\A^\t\\) costs
+
+\\[\approx \sum\_{i=1}^M \sum\_{j=1}^i \max(q_i, q_j) N\\]
+
+Precomputing row norms of \\(\A\A^\t\\) costs
+
+\\[\approx \sum\_{i=1}^M p\_{i} M\\]
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+#### Cheapened Update
+
+\\[
+\begin{align}
+\x^{(k+1)} &= \x^{(k)} + \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t \\\\
+&= \x^{(k)} + \frac{\A\_i \A^\t r^{(k)}}{\norm{\A\_i \A^\t}^2}\A\_i^\t
+\end{align}
+\\]
+
+\\[r^{(k+1)} = r^{(k)} - \frac{\A_i \A^\t r^{(k)}}{\norm{\A\_i \A^\t}^2}\A \A_i^\t \\]
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+
+Step size costs 
+
+\\[\approx p\_{i}M\\]
+
+Rest of update costs 
+
+\\[\approx q\_iN + p\_{i}M\\]
+
+
+
+
+-vertical-
+
+## Optimally Relaxed RK
+#### Expected Update Cost
+
+\\[\hat{q}N + 2 \hat{p} M\\]
+
+where \\(\hat{q}=\sum\_{i=1}^M \frac{\norm{\A\_i \A^\t}^2}{\norm{\A \A^\t}\_F^2} q\_i\\)
+
+and \\(\hat{p}=\sum\_{i=1}^M \frac{\norm{\A\_i \A^\t}^2}{\norm{\A \A^\t}\_F^2} p\_i\\)
+
+
+
+
+-horizontal-
+
+## Costs VS Params
+
+Suppose all rows of \\(\A\\) have sparsity \\(q\\) (ie. \\(q\_i \equiv q\\))
+
+Then \\(p\_i \equiv p = \frac{\left(1-(1-q)^N\right) + (M-1)\left(1-(1-q^2)^N\right)}{M}\\)
+
+That is, the rows of \\(\A\A^\t\\) all have sparsity \\(p\\).
+
+
+
+
+-vertical-
+
+## Costs VS Params
+
+RK update costs:
+
+\\[
+\approx 2qN
+\\]
+
+Optimally relaxed RK update costs:
+
+\\[
+\approx qN + 2pM
+\\]
+
+
+
+
+-vertical-
+
+## Costs VS Params
+
+\\[
+\begin{align}
+pM &= \left(1-(1-q)^N\right) + (M-1)\left(1-(1-q^2)^N\right) \\\\
+&\approx M\left(1-(1-q^2)^N\right) \\\\
+&\approx q^2 MN
+\end{align}
+\\]
+
+
+
+
+-vertical-
+
+## Costs VS Params
+
+Optimally Relaxed RK updates cost
+
+\\[
+\approx qM
+\\]
+
+times as much as vanilla RK updates
 
 
 
