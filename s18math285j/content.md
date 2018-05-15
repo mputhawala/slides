@@ -300,7 +300,7 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 
 Suppose the row entries \\(\A\_{ij} \overset{\_\mathrm{iid}}{\sim} \mathrm{Bern}(q_i)\\)
 
-What are the precompute and update costs (in SAXPYs)?
+What are the precompute and update costs (in AXPYs)?
 
 
 
@@ -325,7 +325,7 @@ Define
 
 
 
--horizontal-
+-vertical-
 
 ## RK Precompute Cost
 
@@ -364,7 +364,7 @@ where \\(\bar{q}=\sum\_{i=1}^M \frac{\norm{\A\_i}^2}{\norm{\A}\_F^2} q\_i\\)
 
 
 
--horizontal-
+-vertical-
 
 ## Optimally Relaxed RK
 
@@ -425,7 +425,7 @@ and \\(\hat{p}=\sum\_{i=1}^M \frac{\norm{\A\_i \A^\t}^2}{\norm{\A \A^\t}\_F^2} p
 
 
 
--horizontal-
+-vertical-
 
 ## Costs VS Params
 
@@ -465,9 +465,12 @@ Optimally relaxed RK update costs:
 \begin{align}
 pM &= \left(1-(1-q)^N\right) + (M-1)\left(1-(1-q^2)^N\right) \\\\
 &\approx M\left(1-(1-q^2)^N\right) \\\\
-&\approx q^2 MN
+&\approx q^2 MN \\\\
+&= (qM)(qN)
 \end{align}
 \\]
+
+This is the average number of nonzeros in a column times the average number of nonzeros in a row
 
 
 
@@ -483,6 +486,57 @@ Optimally Relaxed RK updates cost
 \\]
 
 times as much as vanilla RK updates
+
+
+
+
+-horizontal-
+
+## Optimally Relaxed RK
+#### Efficient Updates
+
+Can we reorganize updates to run in \\(O(N)\\) time?
+
+
+
+
+-vertical-
+
+\\[\x^{(k+1)} = \x^{(k)} + \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2}\A\_i^\t\\]
+
+
+
+
+-vertical-
+
+\\[\x^{(k+1)} = \x^{(k)} + \gamma\_k \A\_i^\t\\]
+
+\\[
+\begin{align}
+\gamma\_k &= \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2} \\\\
+&= \frac{\A\_i z^{(k)}}{\norm{\A\_i \A^\t}^2}
+\end{align}
+\\]
+
+\\[
+\begin{align}
+z^{(k+1)} &= \A^\t (\b-\A\x^{(k+1)}) \\\\
+&= z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t
+\end{align}
+\\]
+
+
+
+
+-vertical-
+
+## An O(N) Update
+
+\\[\gamma\_k = \frac{\A\_i z^{(k)}}{\norm{\A\_i \A^\t}^2}\\]
+
+\\[\x^{(k+1)} = \x^{(k)} + \gamma\_k \A\_i^\t\\]
+
+\\[z^{(k+1)} = z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t\\]
 
 
 
