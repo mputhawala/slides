@@ -20,6 +20,7 @@ Here there be MathJax
 \def\E{\mathbb{E}}
 \def\e{\mathbf{e}}
 \def\x{\mathbf{x}}
+\def\z{\mathbf{z}}
 \def\y{\mathbf{y}}
 \def\A{\mathbf{A}}
 \def\b{\mathbf{b}}
@@ -66,10 +67,10 @@ In the overdetermined inconsistent case
 ## Convergence Horizon
 
 \\[
-\E \norm{\x^{(k)}-\xexact}^2 \le r^k \norm{\x^{(0)} - \xexact}^2 + \frac{\norm{\b-\A\xexact}^2}{\sigma\_{N}^2}
+\E \norm{\x^{(k)}-\xexact}^2 \le r^k \norm{\x^{(0)} - \xexact}^2 + \frac{\norm{\b-\A\xexact}^2}{\sigma\_\min^2}
 \\]
 
-Where \\(r = 1-\frac{\sigma\_N^2}{\sum\_{l=1}^N \sigma\_l^2}\\)
+Where \\(r = 1-\frac{\sigma\_\min^2}{\sum\_{l=1}^N \sigma\_l^2}\\)
 
 
 
@@ -159,7 +160,7 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 Borrowing the convergence of RK
 
 \\[
-\E \norm{\A\e^{(k)}}^2 \le \left(1 - \frac{\sigma\_N^4}{\sum\_{l=1}^N \sigma\_l^4}\right)^k \norm{\A\e^{(0)}}^2
+\E \norm{\A\e^{(k)}}^2 \le \left(1 - \frac{\sigma\_\min^4}{\sum\_{l=1}^N \sigma\_l^4}\right)^k \norm{\A\e^{(0)}}^2
 \\]
 
 
@@ -168,10 +169,10 @@ Borrowing the convergence of RK
 -vertical-
 
 \\[
-\E \norm{\x^{(k)}-\xexact}^2 \le \frac{\sigma\_1^2}{\sigma\_N^2}r^k \norm{\x^{(0)} - \xexact}^2
+\E \norm{\x^{(k)}-\xexact}^2 \le \frac{\sigma\_\max^2}{\sigma\_\min^2}r^k \norm{\x^{(0)} - \xexact}^2
 \\]
 
-Where \\(r = 1 - \frac{\sigma\_N^4}{\sum\_{l=1}^N \sigma\_l^4}\\)
+Where \\(r = 1 - \frac{\sigma\_\min^4}{\sum\_{l=1}^N \sigma\_l^4}\\)
 
 
 
@@ -290,6 +291,14 @@ Define \\(\e^{(k)}=\x^{(k)} - \xexact\\)
 -vertical-
 
 <img class="plain" src="images/step_size_vs_n_terms_hist.svg" width="100%"/>
+
+
+
+
+-horizontal-
+
+## Week 8
+## Presentation
 
 
 
@@ -495,7 +504,7 @@ times as much as vanilla RK updates
 ## Optimally Relaxed RK
 #### Efficient Updates
 
-Can we reorganize updates to run in \\(O(N)\\) time?
+Can we reorganize updates to run more efficiently?
 
 
 
@@ -514,14 +523,14 @@ Can we reorganize updates to run in \\(O(N)\\) time?
 \\[
 \begin{align}
 \gamma\_k &= \frac{\A\_i \A^\t (\b-\A\x^{(k)})}{\norm{\A\_i \A^\t}^2} \\\\
-&= \frac{\A\_i z^{(k)}}{\norm{\A\_i \A^\t}^2}
+&= \frac{\A\_i \z^{(k)}}{\norm{\A\_i \A^\t}^2}
 \end{align}
 \\]
 
 \\[
 \begin{align}
-z^{(k+1)} &= \A^\t (\b-\A\x^{(k+1)}) \\\\
-&= z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t
+\z^{(k+1)} &= \A^\t (\b-\A\x^{(k+1)}) \\\\
+&= \z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t
 \end{align}
 \\]
 
@@ -530,13 +539,151 @@ z^{(k+1)} &= \A^\t (\b-\A\x^{(k+1)}) \\\\
 
 -vertical-
 
-## An O(N) Update
+## An Efficient Update
 
-\\[\gamma\_k = \frac{\A\_i z^{(k)}}{\norm{\A\_i \A^\t}^2}\\]
+\\[\gamma\_k = \frac{\A\_i \z^{(k)}}{\norm{\A\_i \A^\t}^2}\\]
 
 \\[\x^{(k+1)} = \x^{(k)} + \gamma\_k \A\_i^\t\\]
 
-\\[z^{(k+1)} = z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t\\]
+\\[\z^{(k+1)} = \z^{(k)} - \gamma\_{k}\A^\t \A\A_i^\t\\]
+
+Costs only \\(O(N)\\)
+
+
+
+
+-vertical-
+
+## Initialization
+
+\\[\z^{(0)} = \A^\t (\b-\A\x^{(0)})\\]
+
+Costs \\(O(MN)\\)
+
+
+
+
+-vertical-
+
+## Precompute
+
+Row norms of \\(\A\A^\t\\)
+
+\\[\A^\t \A\\]
+
+\\[\A^\t \A \A^\t\\]
+
+Costs \\(O(M^2 N)\\)
+
+
+
+
+-horizontal-
+
+## Experimental Results
+
+100 x 10 Inconsistent Gaussian System
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_vanilla_errs.svg" width="100%"/>
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/vanilla_vs_bound_errs.svg" width="100%"/>
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_bound_errs.svg" width="100%"/>
+
+
+
+
+-horizontal-
+
+## Why are the bounds
+## So loose?
+
+\\[
+\begin{align}
+\E\norm{\e^{(k+1)}}^2 &= \norm{\e^{(k)}}^2 - \frac{\norm{\A \e ^{(k)}}^2}{\norm{\A}\_F^2}
+\end{align}
+\\]
+
+
+
+
+-vertical-
+
+\\[\left(1-\frac{\sigma\_\max^2}{\sum\_{l=1}^N \sigma\_l^2}\right) \norm{\e^{(k)}} \le\\]
+
+\\[\E\norm{\e^{(k+1)}}^2\\]
+
+\\[\le \left(1-\frac{\sigma\_\min^2}{\sum\_{l=1}^N \sigma\_l^2}\right) \norm{\e^{(k)}}\\]
+
+
+
+
+-horizontal-
+
+## Experimental Results
+
+1000 x 10 Inconsistent Gaussian System
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_vanilla_errs2.svg" width="100%"/>
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_bound_errs2.svg" width="100%"/>
+
+
+
+
+-horizontal-
+
+## Experimental Results
+
+10000 x 10 Inconsistent Gaussian System
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_vanilla_errs3.svg" width="100%"/>
+
+
+
+
+-vertical-
+
+<img class="plain" src="images/opt_vs_bound_errs3.svg" width="100%"/>
+
+
+
+
+-horizontal-
+
+## Future Work
+
+Detect/Estimate convergence horizon. Use vanilla RK until convergence horizon, then switch to optimally relaxed RK.
 
 
 
