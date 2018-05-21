@@ -1,8 +1,6 @@
 ## Approximately Optimally
 ## Relaxed Randomized Kaczmarz
 
-&nbsp;
-
 Jacob
 
 
@@ -11,6 +9,8 @@ Jacob
 -vertical-
 
 Here there be MathJax
+
+Define a bunch of useful commands here.
 
 \\(
 \def\argmin#1{\underset{#1}{\arg\min}}
