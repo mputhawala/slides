@@ -12,6 +12,8 @@ Jacob Moorman
 
 Here there be MathJax
 
+Define a bunch of useful commands here.
+
 \\(
 \def\argmin#1{\underset{#1}{\arg\min}}
 \def\norm#1{\lVert#1\rVert}
