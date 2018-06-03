@@ -1,36 +1,43 @@
 
-## Markdown Delimiters
+## This is a presentation template
 
-See file source for details
+* Press 'o' for overview mode
 
-\\[
-x = \frac{1}{1 + \frac{1}{2}}
-\\]
+* Use arrow keys to navigate presentation
 
-
-
-
--horizontal-
-
-This slide will be the second slide of the presentation. It will be horizontal after the title slide.
-
-
-
-
--vertical-
-
-This slide will be vertically after the second slide
-
-
-
-
--vertical-
-
-This slide will be again vertically after the one above.
+* Organization is top to bottom, left to right
 
 
 
 
 -horizontal-
 
-Another horizontal slide
+To make changes, edit template/content.md
+
+
+
+
+-horizontal-
+
+Slide 2
+
+
+
+
+-vertical-
+
+Slide 2.1
+
+
+
+
+-vertical-
+
+Slide 2.2
+
+
+
+
+-horizontal-
+
+Slide 3
