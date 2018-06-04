@@ -14,7 +14,7 @@
 
 To make changes, edit template/content.md
 
-
+\\( c = \sqrt{a^2 + b^2}\\)
 
 
 -horizontal-
