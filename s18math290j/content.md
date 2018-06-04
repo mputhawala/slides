@@ -4,6 +4,8 @@
 
 * Press 'o' for overview mode
 
+* Use space bar to step through slides in order
+
 * Use arrow keys to navigate presentation
 
 * Organization is top to bottom, left to right
@@ -436,6 +438,8 @@ You should be able to load
 Remember
 
 * Press 'o' for overview mode
+
+* Use space bar to step through slides in order
 
 * Use arrow keys to navigate presentation
 
