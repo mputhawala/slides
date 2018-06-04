@@ -83,7 +83,7 @@ and select "New repository"
 
 -vertical-
 
-* Give your repository a name (call this one "test")
+* Give your repository a name
 * Tick "Initialize this repository with a README"
 * Click "Create repository"
 
@@ -138,6 +138,13 @@ and click the fork button near the top right
 
 -vertical-
 
+Forking is very similar to importing code from an existing repository, but only works on repositories within GitHub.
+
+
+
+
+-vertical-
+
 To rename a repository,
 
 go to the settings tab
@@ -171,16 +178,9 @@ The page should reload and the name of your repository should change
 
 ## Checkpoint
 
-Change the name of "test" to something else
+Go to the settings tab of your repository
 
-verify the name changed, then change it back to "test"
-
-
-
-
--vertical-
-
-Forking is very similar to importing code from an existing repository, but only works on repositories within GitHub.
+Change the name of your repository to "test"
 
 
 
@@ -231,13 +231,16 @@ Eventually the confirmation message turns green if you wait a while and refresh 
 
 ## Checkpoint
 
-Enable GitHub Pages on your test repository
+* Go to the settings tab of your repository
 
-visit the site at [username.github.io/test/]()
+* Enable GitHub Pages on "master branch"
+
+* visit the site at [username.github.io/test/]()
 
 ---
 
-You will get a 404 error if you visit before the confirmation turns green
+You will see outdated content if you visit before the confirmation turns green
+
 
 
 
@@ -258,7 +261,7 @@ which will be accessible at [username.github.io]()
 
 ## Prose.io
 
-A file editor GitHub repositories
+An online GitHub file editor
 
 
 -vertical-
@@ -281,7 +284,7 @@ Authorize prose to access your repositories
 
 -vertical-
 
-Open the "test" repository on prose
+Open the "test" repository on prose.io
 
 <img src="./images/prose_test_repo.png" width="100%">
 
@@ -290,7 +293,7 @@ Open the "test" repository on prose
 
 -vertical-
 
-Add a new file
+Create a new file
 
 <img src="./images/new_file_test_prose.png" width="100%">
 
@@ -302,6 +305,21 @@ Add a new file
 Name the file "index.md"
 
 <img src="./images/prose_index_md.png" width="100%">
+
+
+
+
+-vertical-
+
+You can preview the file
+
+by clicking the eyeball on the right
+
+<img src="./images/prose_preview_file.png" width="100%">
+
+Switch back to editing by clicking
+
+the pencil above the eyeball on the right
 
 
 
@@ -376,13 +394,6 @@ Examples/Demonstrations
 Fork [github.com/jdmoorman/slides]()
 
 <img src="./images/fork_revealjs.png" width="100%">
-
-
-
-
--vertical-
-
-<img src="./images/forking_revealjs.png" width="80%">
 
 
 
@@ -572,6 +583,24 @@ For this tutorial, I've chosen the template "Hyde". However, most templates func
 
 -vertical-
 
+### Other Forkable Jekyll Templates
+
+- [Lanyon](https://github.com/poole/lanyon) by MDO
+- [mojombo.github.io](https://github.com/mojombo/mojombo.github.io) by Tom Preston-Werner
+- [Left](https://github.com/holman/left) by Zach Holman
+- [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) by Michael Rose
+- [Skinny Bones](https://github.com/mmistakes/skinny-bones-jekyll) by Michael Rose
+- [Jekyll Now](https://github.com/barryclark/jekyll-now) by Barry Clark
+
+---
+
+List taken from [Barry Clark's Jekyll Now repo](https://github.com/barryclark/jekyll-now)
+
+
+
+
+-vertical-
+
 Most templates will not have equation rendering
 
 built in, but I've added it to this one
@@ -584,13 +613,6 @@ built in, but I've added it to this one
 Fork [github.com/jdmoorman/hyde](https://github.com/jdmoorman/hyde)
 
 <img src="./images/fork_hyde.png" width="100%">
-
-
-
-
--vertical-
-
-<img src="./images/forking_hyde.png" width="100%">
 
 
 
@@ -1049,3 +1071,32 @@ to the end of the line
 
 Your image should show up at [username.github.io/]()
 
+
+
+
+-horizontal-
+
+## Things not covered that
+## you may find useful
+
+* Using Git for version control
+* [How to install Node.js and npm](https://www.npmjs.com/get-npm)
+* [How to host reveal.js locally](https://github.com/hakimel/reveal.js#installation)
+* [How to host Jekyll locally](https://jekyllrb.com/docs/installation/)
+* [How Jekyll works](https://jekyllrb.com/docs/home/)
+* [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+
+
+
+-horizontal-
+
+## Good Luck, Have Fun
+
+If you need help, feel free to reach out
+
+[jdmoorman@math.ucla.edu]()
+
+These slides are available at
+
+[jacob.moorman.me/slides/s18math290j](https://jacob.moorman.me/slides/s18math290j)
