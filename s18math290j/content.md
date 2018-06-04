@@ -1093,6 +1093,22 @@ Your image should show up at [username.github.io/]()
 
 
 
+-vertical-
+
+There are subtle differences between Katex and MathJax
+
+* Katex was used for website equations
+    * [supported commands](https://khan.github.io/KaTeX/function-support.html)
+    * renders way faster
+    * fewer supported commands
+* MathJax for presentation equations
+    * [Supported commands](http://docs.mathjax.org/en/latest/tex.html)
+    * slow rendering
+    * more supported commands, plugins
+
+
+
+
 -horizontal-
 
 ## Good Luck, Have Fun
