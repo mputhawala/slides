@@ -83,21 +83,11 @@ and select "New repository"
 
 -vertical-
 
-* Give your repository a name
+* Give your repository a name (call this one "test")
 * Tick "Initialize this repository with a README"
 * Click "Create repository"
 
 <img src="./images/new_repository_dialogue.png" width="50%">
-
-
-
-
--vertical-
-
-## Checkpoint
-
-Create a new empty repository
-called "test"
 
 
 
@@ -518,6 +508,7 @@ To add a new slide and start a new column, use
 -horizontal-
 ```
 
+These can be configured, but that's out of scope
 
 
 
@@ -749,6 +740,19 @@ but for now, just leave it as True
 
 -vertical-
 
+If you want to change the colorscheme, you can change
+
+```markdown
+theme_id: "7"
+```
+
+to any of \{7, 8, 9, a, b, c, d, e, f\}
+
+
+
+
+-vertical-
+
 ## Checkpoint
 
 Verify that the changes are reflected at
@@ -912,7 +916,7 @@ commit the file
 
 Open the settings of the file,
 
-<img src="./images/prose_create_draft.png" width="100%">
+<img src="./images/prose_create_draft.png" width="50%">
 
 Click "create draft"
 
@@ -923,7 +927,7 @@ Click "create draft"
 
 Click "Draft to post" and commit
 
-<img src="./images/prose_draft_to_post.png" width="100%">
+<img src="./images/prose_draft_to_post.png" width="60%">
 
 If you get a red warning, reload the page, hope the warning goes away
 
@@ -934,7 +938,14 @@ If you get a red warning, reload the page, hope the warning goes away
 
 Click "Unpublished" and commit
 
-<img src="./images/prose_unpublished.png" width="100%">
+<img src="./images/prose_unpublished.png" width="50%">
+
+
+
+
+-vertical-
+
+<img src="./images/prose_blog_published.png" width="50%">
 
 
 
@@ -946,3 +957,95 @@ Click "Unpublished" and commit
 Your new blog post should show up at
 
 [username.github.io/blog/]()
+
+
+
+
+-horizontal-
+
+## Adding images
+
+prose.io allows you to add images easily
+
+find an image to add to your "About" page
+
+
+
+
+-vertical-
+
+Open [username.github.io/]() > about.md in prose.io 
+
+click the image icon
+
+<img src="./images/prose_image_drop.png" width="50%">
+
+
+
+
+-vertical-
+
+Drag and drop your image, but do not click "insert"
+
+First you must specify where the image should go
+
+
+
+
+-vertical-
+
+For your website repository, a good location is:
+
+```
+/public/images/filename.jpg
+```
+
+For your slides repository, the location should be
+
+```
+/template/images/filename.jpg
+```
+
+
+
+
+-vertical-
+
+Edit the location of the image, and click "insert"
+
+<img src="./images/prose_public_images_cat.png" width="40%">
+
+
+
+
+-vertical-
+
+A Markdown image link will be inserted into the text.
+
+```markdown
+![cat.png]({{site.baseurl}}/public/images/cat.png)
+```
+
+If you want to resize the image you can add 
+
+```markdown
+{:height="36px" width="36px"}
+```
+
+or
+
+```markdown
+{:height="50%" width="50%"}
+```
+
+to the end of the line
+
+
+
+
+-vertical-
+
+## Checkpoint
+
+Your image should show up at [username.github.io/]()
+
